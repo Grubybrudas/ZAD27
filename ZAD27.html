@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zadania z tablicami JS</title>
+
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background:#f4f4f4;
+        padding:20px;
+    }
+
+    h1{
+        color:#333;
+    }
+
+    button{
+        padding:10px 20px;
+        margin:10px 0;
+        cursor:pointer;
+        border:none;
+        background:#0077ff;
+        color:white;
+        border-radius:6px;
+    }
+
+    pre{
+        background:white;
+        padding:15px;
+        border-radius:8px;
+        overflow:auto;
+        border:1px solid #ccc;
+    }
+</style>
+</head>
+<body>
+
+<h1>Zad 27</h1>
+
+<button onclick="uruchom()">Uruchom program</button>
+
+<pre id="wynik"></pre>
+
+<script>
+
+function uruchom(){
+
+let out = "";
+
+let tab1 = [7,3,1,6,9,5,4,10,2,2];
+
+out += "TAB1:\n";
+out += tab1 + "\n\n";
+
+out += "5 komórka tablicy: " + tab1[4] + "\n";
+
+tab1[6] = 12;
+
+out += "Po zmianie 7 komórki:\n";
+out += tab1 + "\n\n";
+
+let tab2 = [...tab1];
+
+out += "TAB2 (kopia TAB1):\n";
+out += tab2 + "\n\n";
+
+let tab3 = [];
+
+for(let i=0;i<tab1.length;i++){
+    tab3[i] = tab1[i] + tab2[i];
+}
+
+out += "TAB3 = TAB1 + TAB2:\n";
+out += tab3 + "\n\n";
+
+tab2 = [...tab1].reverse();
+
+out += "TAB2 odwrotnie:\n";
+out += tab2 + "\n\n";
+
+let ile = parseInt(prompt("Ile liczb chcesz wpisać?"));
+
+let liczby = [];
+
+for(let i=0;i<ile;i++){
+    liczby.push(parseInt(prompt("Podaj liczbę nr " + (i+1))));
+}
+
+out += "TABLICA UŻYTKOWNIKA:\n";
+out += liczby + "\n\n";
+
+let min = Math.min(...liczby);
+let max = Math.max(...liczby);
+
+out += "Minimum: " + min + "\n";
+out += "Maximum: " + max + "\n";
+
+let suma = liczby.reduce((a,b)=>a+b,0);
+
+let srednia = suma / liczby.length;
+
+out += "Średnia: " + srednia + "\n";
+
+let ile3 = liczby.filter(x => x === 3).length;
+
+out += "Ilość cyfr 3: " + ile3 + "\n";
+
+let rosnaco = [...liczby].sort((a,b)=>a-b);
+
+out += "Sortowanie rosnące:\n";
+out += rosnaco + "\n";
+
+let mediana;
+
+if(rosnaco.length % 2 === 0){
+
+    mediana =
+        (rosnaco[rosnaco.length/2-1] +
+        rosnaco[rosnaco.length/2]) / 2;
+
+}else{
+
+    mediana = rosnaco[Math.floor(rosnaco.length/2)];
+}
+
+out += "Mediana: " + mediana + "\n";
+
+out += "3 najmniejsze:\n";
+out += rosnaco.slice(0,3) + "\n";
+
+out += "3 największe:\n";
+out += rosnaco.slice(-3) + "\n";
+
+let kwadraty = liczby.map(x => x*x);
+
+out += "Kwadraty elementów:\n";
+out += kwadraty + "\n";
+
+let parzyste = liczby.filter(x => x%2===0).length;
+
+let nieparzyste = liczby.filter(x => x%2!==0).length;
+
+out += "Parzyste: " + parzyste + "\n";
+out += "Nieparzyste: " + nieparzyste + "\n";
+
+let podzielne3 = liczby.filter(x => x%3===0).length;
+
+out += "Podzielne przez 3: " + podzielne3 + "\n\n";
+
+let litery = new Array(10);
+
+for(let i=0;i<10;i++){
+    litery[i] = prompt("Podaj literę nr " + (i+1));
+}
+
+out += "Litery użytkownika:\n";
+out += litery + "\n\n";
+
+let wyraz = prompt("Podaj wyraz 10-literowy");
+
+let tabLitery = wyraz.split("");
+
+out += "Wyraz jako tablica:\n";
+out += tabLitery + "\n";
+
+let zamiana = tabLitery.map(l => {
+
+    if(l === l.toUpperCase()){
+
+        return l.toLowerCase();
+
+    }else{
+
+        return l.toUpperCase();
+    }
+});
+
+out += "Po zamianie liter:\n";
+out += zamiana + "\n";
+
+let losowo = [...tabLitery].sort(()=>Math.random()-0.5);
+
+out += "Losowa kolejność:\n";
+out += losowo + "\n\n";
+
+let A = [];
+
+for(let i=0;i<100;i++){
+    A.push(Math.floor(Math.random()*20));
+}
+
+out += "100 losowych liczb:\n";
+out += A + "\n\n";
+
+let maxA = Math.max(...A);
+
+let countMax = A.filter(x => x===maxA).length;
+
+out += "Największa liczba: " + maxA + "\n";
+out += "Ilość wystąpień: " + countMax + "\n\n";
+
+out += "Liczby nieparzyste:\n";
+out += A.filter(x => x%2!==0) + "\n\n";
+
+let nieparzysteIndeksy = [];
+
+for(let i=1;i<A.length;i+=2){
+    nieparzysteIndeksy.push(A[i]);
+}
+
+out += "Elementy o nieparzystych indeksach:\n";
+out += nieparzysteIndeksy + "\n\n";
+
+let przedzial = A.filter(x => x>=5 && x<15);
+
+out += "Liczby z przedziału <5,15):\n";
+out += przedzial + "\n";
+
+out += "Ilość: " + przedzial.length + "\n\n";
+
+let a = parseInt(prompt("Podaj liczbę a"));
+
+let najblizszy = A[0];
+
+for(let x of A){
+
+    if(Math.abs(x-a) < Math.abs(najblizszy-a)){
+        najblizszy = x;
+    }
+}
+
+out += "Najbliższy element dla " + a + ": " + najblizszy + "\n\n";
+
+let indeksMin = A.indexOf(Math.min(...A));
+
+out += "Minimum: " + A[indeksMin] + "\n";
+
+if(indeksMin > 0){
+    out += "Poprzednik: " + A[indeksMin-1] + "\n";
+}
+
+if(indeksMin < A.length-1){
+    out += "Następnik: " + A[indeksMin+1] + "\n";
+}
+
+out += "\n";
+
+let wieksze10 = A.filter(x => x>10);
+
+out += "Elementy >10:\n";
+out += wieksze10 + "\n";
+
+out += "Rozmiar nowej tablicy: " + wieksze10.length + "\n\n";
+
+let B = [];
+
+let sumaB = 0;
+
+for(let i=0;i<A.length;i++){
+
+    sumaB += A[i];
+
+    B[i] = sumaB;
+}
+
+out += "Tablica sum częściowych B:\n";
+out += B + "\n\n";
+
+let malejaco = [...A].sort((a,b)=>b-a);
+
+out += "Sortowanie malejące:\n";
+out += malejaco + "\n\n";
+
+let licznik = {};
+
+for(let x of A){
+
+    licznik[x] = (licznik[x] || 0) + 1;
+}
+
+out += "Elementy występujące minimum 3 razy:\n";
+
+for(let key in licznik){
+
+    if(licznik[key] >= 3){
+
+        out += key + " -> " + licznik[key] + " razy\n";
+    }
+}
+
+out += "\n";
+
+let fib = [0,1];
+
+for(let i=2;i<100;i++){
+
+    fib[i] = fib[i-1] + fib[i-2];
+}
+
+out += "Fibonacci:\n";
+out += fib + "\n\n";
+
+let potegi2 = [];
+
+for(let i=0;i<100;i++){
+
+    potegi2[i] = 2**i;
+}
+
+out += "Potęgi liczby 2:\n";
+out += potegi2 + "\n\n";
+
+let ciag3 = [];
+
+for(let i=0;i<100;i++){
+
+    ciag3[i] = (i+1)*3;
+}
+
+out += "Ciąg 3,6,9,12...\n";
+out += ciag3 + "\n\n";
+
+let ciag2 = [];
+
+for(let i=0;i<100;i++){
+
+    ciag2[i] = 2**(i+1);
+}
+
+out += "Ciąg 2,4,8,16...\n";
+out += ciag2 + "\n\n";
+
+document.getElementById("wynik").textContent = out;
+
+}
+
+</script>
+
+</body>
+</html>
